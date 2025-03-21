@@ -1,0 +1,46 @@
+/* LandingPage.css */
+.landing-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: white; /* Optional background color */
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* Space between images */
+    flex-wrap: wrap; /* Wrap images on smaller screens */
+  
+  }
+  .image-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .image-title {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #4d216d;
+    text-align: center;
+    font-weight: bold;
+  }
+  .responsive-image {
+    width: 130px; /* Fixed width */
+    height: 130px; /* Fixed height */
+    
+  }
+
+  /* Media query for screens less than 500px wide */
+@media (max-width: 500px) {
+    .image-container {
+      flex-direction: column; /* Stack images vertically */
+    }
+  
+    .responsive-image {
+      width: 100%; /* Full width of the container */
+      height: auto; /* Maintain aspect ratio */
+    }
+  }
