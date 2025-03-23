@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.508d61a5.css",
+    "main.js": "/static/js/main.4e0caaee.js",
+    "static/media/bg.png": "/static/media/bg.7a777833f9d0471253c8.png",
+    "static/media/eyeclose.png": "/static/media/eyeclose.ec7f875db2d145452778.png",
+    "static/media/eyeopen.png": "/static/media/eyeopen.e1889b25de1f6580bfd6.png",
+    "static/media/OnAndOff.png": "/static/media/OnAndOff.519ee23a75af28369e82.png",
+    "static/media/Notification.png": "/static/media/Notification.198eace7e2a4e3000ec5.png",
+    "static/media/EmergencyFlow.png": "/static/media/EmergencyFlow.4861ad8b55b54d0c037f.png",
+    "static/media/ocado_logo1.svg": "/static/media/ocado_logo1.028794088412b0d333794410b104416d.svg",
+    "index.html": "/index.html",
+    "main.508d61a5.css.map": "/static/css/main.508d61a5.css.map",
+    "main.4e0caaee.js.map": "/static/js/main.4e0caaee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.508d61a5.css",
+    "static/js/main.4e0caaee.js"
+  ]
+}

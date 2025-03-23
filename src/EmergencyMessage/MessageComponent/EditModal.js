@@ -8,6 +8,7 @@ const EditModal = ({ isOpen, onRequestClose, item, onSave ,fetchData }) => {
   const [message, setMessage] = useState('');
   const [id, setId] = useState('');
   const updatedBy = localStorage.getItem('username');
+  const [error, setError] = useState('');
 
 
   useEffect(() => {
@@ -16,8 +17,16 @@ const EditModal = ({ isOpen, onRequestClose, item, onSave ,fetchData }) => {
       setMessage(item.message);
     }
   }, [item]);
-
+  const handleClose = () => {
+    setError(''); // Reset the error message
+    onRequestClose();
+  };
   const handleSave = async () => {
+    if (!message.trim() ) {
+      setError('Message is required.');
+     
+      return;
+    }
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}/editmessage`, {
       method: 'POST',
       headers: {
@@ -32,11 +41,12 @@ const EditModal = ({ isOpen, onRequestClose, item, onSave ,fetchData }) => {
     const updatedItem = await response.json();
     onSave(updatedItem);
     await fetchData();
+    setError('')
     onRequestClose(); // Close the modal
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose}
+    <Modal isOpen={isOpen} onRequestClose={handleClose}
     style={{
       overlay: { zIndex: 1000 },
       content: {
@@ -65,8 +75,9 @@ const EditModal = ({ isOpen, onRequestClose, item, onSave ,fetchData }) => {
         <div style={{ marginBottom: '10px', padding: '10px 20px' }}>
         <textarea style={{ width: '100%', padding: '10px', border: '1px solid #ccc',borderRadius:"8px" }}  value={message} onChange={(e) => setMessage(e.target.value)} />
         </div>
+        {error && <div style={{ color: 'red', padding: '10px 20px' }}>{error}</div>}
         <div className='customUI-button-body'>
-        <button className="customUI-No-Button" type="button" onClick={onRequestClose}>Cancel</button>
+        <button className="customUI-No-Button" type="button" onClick={handleClose}>Cancel</button>
         <button className="customUI-Yes-Button" type="button" onClick={handleSave}>Save</button>
         </div>
       </form>

@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import eyeOpen from '../images/eyeopen.png';
+import eyeClose from '../images/eyeclose.png';
+
 
 const clientId = `${process.env.REACT_APP_CLIENT_ID}`;
 
@@ -129,7 +132,7 @@ const LoginPage = () => {
               required
             />
             <span className="password-toggle-icon" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+              {showPassword ? <img style={{width:"25px",height:"20px"}}src={eyeClose}></img> : <img style={{width:"25px",height:"20px"}} src={eyeOpen}></img> }
             </span>
           </div>
           {error && (

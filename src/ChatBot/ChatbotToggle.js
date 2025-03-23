@@ -43,7 +43,7 @@ const ChatbotToggle = () => {
   }, []);
 
   const handleSave = async () => {
-    if (!message || !flow) {
+    if (!message.trim()  || !flow) {
       setError('All fields are required.');
       return;
     }
@@ -126,6 +126,12 @@ const ChatbotToggle = () => {
     setModalIsOpen(false);
     setError('');
   };
+  const handleMessageChange = (e) => {
+    const input = e.target.value;
+    if (input.length <= 1000) {
+      setMessage(input);
+    }
+  };
 
   return (
     <div style={{ padding: "30px" }}>
@@ -164,11 +170,14 @@ const ChatbotToggle = () => {
               rows="3"
               className="form-control"
               placeholder='Message'
+              onChange={handleMessageChange} 
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
               style={{ width: '100%' }}
             />
           <span style={{ position: 'absolute', top: '-10px', right: '-10px', color: 'red' }}>*</span>
+          <div style={{ textAlign: 'right',color: message.length === 1000 ? 'red' : 'black' }}>
+             {message.length}/1000
+            </div>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
             <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '10px', width: "48%" }}>
@@ -188,7 +197,7 @@ const ChatbotToggle = () => {
               <span style={{ position: 'absolute', top: '-8px', right: '-10px', color: 'red' }}>*</span>
               </div>
           </div>
-          {error && <div style={{ color: 'red', padding: '10px' }}>{error}</div>}
+          {error && <div style={{ color: 'red', padding: '10px 10px 10px 0px' }}>{error}</div>}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <button onClick={handleCancel} className="customUI-No-Button" >
@@ -254,11 +263,11 @@ const ChatbotToggle = () => {
           <table>
             <thead>
               <tr style={{ textAlign: "center" }}>
-                <th>Queue Name</th>
-                <th>Modified By</th>
-                <th style={{ textAlign: 'center' }}>Message</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th style={{ width: "15%" }}>Queue Name</th>
+                <th style={{ width: "15%" }}>Modified By</th>
+                <th style={{ width: "40%",textAlign: 'center' }}>Message</th>
+                <th style={{ width: "10%" }}>Status</th>
+                <th style={{ width: "20%" }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -271,10 +280,10 @@ const ChatbotToggle = () => {
               ) : (
                 data.map((item, index) => (
                   <tr key={index} style={{ textAlign: "center" }}>
-                    <td>{item.queueName}</td>
-                    <td>{item.updatedBy}</td>
-                    <td style={{ textAlign: "left" }}>{item.message}</td>
-                    <td {...(item.status ? {} : { 'data-tooltip-id': 'toggle' })}>
+                    <td style={{ width: "15%" }}>{item.queueName}</td>
+                    <td style={{ width: "15%" }}>{item.updatedBy}</td>
+                    <td style={{ textAlign: "left" ,width:"40%",overflowWrap:"anywhere" }}>{item.message}</td>
+                    <td style={{ width: "10%" }} {...(item.status ? {} : { 'data-tooltip-id': 'toggle' })}>
                       <Switch
                         onChange={(checked) => handleSwitch(checked, item.queueName, item.updatedBy)}
                         checked={item.status}
@@ -315,7 +324,7 @@ const ChatbotToggle = () => {
                         width={40}
                       />
                     </td>
-                    <td>
+                    <td style={{width:"20%"}}>
                       <img
                         {...(item.status ? {} : { 'data-tooltip-id': 'edit' })}
                         src={FaEdit}

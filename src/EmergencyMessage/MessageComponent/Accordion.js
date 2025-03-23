@@ -184,7 +184,7 @@ const Accordion = ({ title, data, filter, selectedFlow, setSelectedFlow, fetchDa
                         Code {sortOrder === 'asc' ? '↓' : '↑'}
                       </th>
                       {title === 'Active Emergency Messages' && <th>Flow</th>}
-                      <th>Activated On</th>
+                      <th >Activated On</th>
                       <th>Message</th>
                       <th>Status</th>
                       {title === 'Configure Emergency Messages' && <th>Actions</th>}

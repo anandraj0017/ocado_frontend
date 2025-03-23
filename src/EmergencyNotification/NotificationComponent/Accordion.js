@@ -285,15 +285,15 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
                               alt="Download"
                             />
                             <img
-                              {...(item.isActive  ? {} : (item.filename ?{ 'data-tooltip-id': 'delete' }:{}))}
+                              {...(item.isActive  ? {} :{ 'data-tooltip-id': 'delete' })}
                               src={deleteIcon}
                               style={{
                                 width: "20px",
                                 height: "20px",
-                                cursor: item.isActive  ? 'not-allowed' : (item.filename ? 'pointer' : 'not-allowed'),
-                                opacity: item.isActive ? 0.5 : (item.filename ? '1' : '0.5')
+                                cursor: item.isActive  ? 'not-allowed' : 'pointer',
+                                opacity: item.isActive ? 0.5 : 1
                               }}
-                              onClick={!item.isActive && item.filename ?   () => handleDelete(item.docID) : null}
+                              onClick={!item.isActive  ?   () => handleDelete(item.docID) : null}
                               alt="Delete"
                             />
                           </td>

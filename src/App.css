@@ -140,18 +140,24 @@ th:nth-child(3), td:nth-child(3) {
   width: 50%;
 } */
 .en-active-table th:nth-child(1), .en-active-table td:nth-child(1) {
-  width: 15%;
+  width: 10%;
 }
  
 .en-active-table th:nth-child(2), .en-active-table td:nth-child(2) {
-  width: 15%;
+  width: 10%;
 }
  
 .en-active-table th:nth-child(3), .en-active-table td:nth-child(3) {
-  width: 50%;
+  width: 15%;
 }
 .en-active-table th:nth-child(4), .en-active-table td:nth-child(4) {
+  width: 40%;
+}
+.en-active-table th:nth-child(5), .en-active-table td:nth-child(5) {
   width: 20%;
+}
+.en-active-table th:nth-child(6), .en-active-table td:nth-child(6) {
+  width: 5%;
 }
 
 .en-all-table th:nth-child(1), .en-all-table td:nth-child(1) {
