@@ -1,6 +1,7 @@
 // src/components/ConfirmationModal.js
 import React from 'react';
 import Modal from 'react-modal';
+import '../../styles/notification_accordion.css'
 
 Modal.setAppElement('#root');
 
@@ -28,12 +29,12 @@ const ConfirmationModal = ({ isOpen, onRequestClose, onConfirm, message }) => {
       }
     }}
      contentLabel="Confirmation">
-     <h2 style={{ backgroundColor: '#4d216d', color: '#fff', padding: '10px', textAlign: 'center', width: '100%' }}>Confirmation</h2>
-     <div style={{padding:"20px",textAlign:"center"}}>{message}</div>
-     <div className='customUI-button-body'>
-     <button className="customUI-No-Button" onClick={onRequestClose}>Cancel</button>
-     <button className="customUI-Yes-Button"onClick={onConfirm}>OK</button>
-     </div>
+     <h2 className="notification-confirmation-modal-header">Confirmation</h2>
+<div className="notification-confirmation-modal-body">{message}</div>
+<div className="customUI-button-body">
+  <button className="customUI-No-Button" onClick={onRequestClose}>Cancel</button>
+  <button className="customUI-Yes-Button" onClick={onConfirm}>OK</button>
+</div>
     </Modal>
   );
 };

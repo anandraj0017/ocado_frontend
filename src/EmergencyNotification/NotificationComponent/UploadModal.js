@@ -91,63 +91,49 @@ const UploadModal = ({ isOpen, onRequestClose, onUpload }) => {
       }}
       contentLabel="Upload Notification"
     >
-      <h4
-        style={{
-          backgroundColor: '#4d216d',
-          color: '#fff',
-          padding: '10px',
-          textAlign: 'center',
-          width: '100%',
-        }}
-      >
-        Upload Notification
-      </h4>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', padding: '10px 20px', position: 'relative' }}>
-        <span style={{ position: 'absolute', top: '0px', right: '10px', color: 'red' }}>*</span>
-        <input
-          type="text"
-          readOnly
-          value={file ? file.name : 'Click here to upload a file'}
-          onClick={() => document.getElementById('file-upload').click()}
-          style={{
-            flex: 1,
-            padding: '10px',
-            border: '1px solid #ccc',
-            cursor: 'pointer',
-            borderRadius: '8px',
-          }}
-        />
-        <input
-          id="file-upload"
-          type="file"
-          style={{ display: 'none' }}
-          onChange={handleFileChange}
-        />
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', padding: '10px 20px', position: 'relative' }}>
-        <div style={{ position: 'relative', width: '48%' }}>
-          <select
-            value={flow}
-            onChange={handleFlow}
-            style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '8px' }}
-          >
-            <option value="">Select Flow</option>
-            <option value="retail">Retail</option>
-            <option value="zoom">Zoom</option>
-            <option value="driver">Driver</option>
-          </select>
-          <span style={{ position: 'absolute', top: '-8px', right: '-10px', color: 'red' }}>*</span>
-        </div>
-      </div>
-      {error && <div style={{ color: 'red', padding: '10px 20px' }}>{error}</div>}
-      <div className="customUI-button-body">
-        <button type="button" className="customUI-No-Button" onClick={() => { resetForm(); onRequestClose(); }}>
-          Cancel
-        </button>
-        <button type="button" className="customUI-Yes-Button" onClick={handleUpload}>
-          Upload
-        </button>
-      </div>
+     <h4 className="notification-upload-modal-header">
+  Upload Notification
+</h4>
+<div className="notification-upload-modal-file-input-container">
+  <span className="notification-upload-modal-required">*</span>
+  <input
+    type="text"
+    readOnly
+    value={file ? file.name : 'Click here to upload a file'}
+    onClick={() => document.getElementById('file-upload').click()}
+    className="notification-upload-modal-file-input"
+  />
+  <input
+    id="file-upload"
+    type="file"
+    style={{ display: 'none' }}
+    onChange={handleFileChange}
+  />
+</div>
+<div className="notification-upload-modal-select-container">
+  <div className="notification-upload-modal-select-wrapper">
+    <select
+      value={flow}
+      onChange={handleFlow}
+      className="notification-upload-modal-select"
+    >
+      <option value="">Select Flow</option>
+      <option value="retail">Retail</option>
+      <option value="zoom">Zoom</option>
+      <option value="driver">Driver</option>
+    </select>
+    <span className="notification-upload-modal-required-option">*</span>
+  </div>
+</div>
+{error && <div className="notification-upload-modal-error">{error}</div>}
+<div className="customUI-button-body">
+  <button type="button" className="customUI-No-Button" onClick={() => { resetForm(); onRequestClose(); }}>
+    Cancel
+  </button>
+  <button type="button" className="customUI-Yes-Button" onClick={handleUpload}>
+    Upload
+  </button>
+</div>
     </Modal>
     <SuccessModal
         isOpen={isSuccessModalOpen}

@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import FaEdit from '../images/editIcon.png';
 import FaTrash from '../images/deleteIcon.png';
 import { Tooltip as ReactTooltip } from "react-tooltip";
-
+import '../styles/chatbot_toggle.css'
 Modal.setAppElement('#root');
 
 const ChatbotToggle = () => {
@@ -134,7 +134,7 @@ const ChatbotToggle = () => {
   };
 
   return (
-    <div style={{ padding: "30px" }}>
+    <div className='chatbot-main-div'>
       
       <Modal
         isOpen={modalIsOpen}
@@ -160,53 +160,52 @@ const ChatbotToggle = () => {
           }
         }}
       >
-        <div style={{ backgroundColor: "#4d216d", color: "white", padding: "15px 20px" }}>
-          <h5 style={{ textAlign: "center", margin: 0 }}>{isEditing ? 'Edit Message' : 'Create Message'}</h5>
+        <div className='chatbot-heading-div'>
+          <h5 className='chatbot-heading'>{isEditing ? 'Edit Message' : 'Create Message'}</h5>
         </div>
-        <div style={{ padding: '15px 20px', flex: '1', overflowY: 'hidden' }}>
-          <div style={{ position: 'relative', marginBottom: '15px' }}>
-            <textarea
-              type="text"
-              rows="3"
-              className="form-control"
-              placeholder='Message'
-              onChange={handleMessageChange} 
-              value={message}
-              style={{ width: '100%' }}
-            />
-          <span style={{ position: 'absolute', top: '-10px', right: '-10px', color: 'red' }}>*</span>
-          <div style={{ textAlign: 'right',color: message.length === 1000 ? 'red' : 'black' }}>
-             {message.length}/1000
-            </div>
+        <div className="chatbot-toggle-message-container">
+        <div className="chatbot-toggle-textarea-wrapper">
+          <textarea
+            type="text"
+            rows="3"
+            className="form-control chatbot-toggle-custom-textarea"
+            placeholder="Message"
+            onChange={handleMessageChange}
+            value={message}
+          />
+          <span className="chatbot-toggle-required-indicator">*</span>
+          <div className={`chatbot-toggle-message-length ${message.length === 1000 ? 'chatbot-toggle-message-length-red' : ''}`}>
+            {message.length}/1000
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '10px', width: "48%" }}>
-              <select
-                style={{ width: '100%', border: '1px solid #ccc', padding: '5px', borderRadius: "8px" }}
-                value={flow}
-                onChange={(e) => setFlow(e.target.value)}
-                disabled={isEditing}
-              >
-                <option value="">{isEditing ? flow : "Select Flow"}</option>
-                {flowOptions.map((option) => (
-                  <option key={option} value={option} disabled={savedFlows.includes(option)}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <span style={{ position: 'absolute', top: '-8px', right: '-10px', color: 'red' }}>*</span>
-              </div>
+        </div>
+        <div className="chatbot-toggle-select-container">
+          <div className="chatbot-toggle-select-wrapper">
+            <select
+              className="chatbot-toggle-custom-select"
+              value={flow}
+              onChange={(e) => setFlow(e.target.value)}
+              disabled={isEditing}
+            >
+              <option value="">{isEditing ? flow : "Select Flow"}</option>
+              {flowOptions.map((option) => (
+                <option key={option} value={option} disabled={savedFlows.includes(option)}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            <span className="chatbot-toggle-required-indicator">*</span>
           </div>
-          {error && <div style={{ color: 'red', padding: '10px 10px 10px 0px' }}>{error}</div>}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <button onClick={handleCancel} className="customUI-No-Button" >
-            Cancel
-          </button>
-          <button onClick={handleSave} className="customUI-Yes-Button" >
-            {isEditing ? "Save" : "Add"}
-          </button>
-        </div>
+        {error && <div className="chatbot-toggle-error-message">{error}</div>}
+      </div>
+      <div className="chatbot-toggle-action-buttons">
+        <button onClick={handleCancel} className="customUI-No-Button">
+          Cancel
+        </button>
+        <button onClick={handleSave} className="customUI-Yes-Button">
+          {isEditing ? "Save" : "Add"}
+        </button>
+      </div>
       </Modal>
   
       <Modal
@@ -233,24 +232,22 @@ const ChatbotToggle = () => {
           }
         }}
       >
-        <div style={{ backgroundColor: "#4d216d", color: "white", padding: "15px 20px" }}>
-          <h4 style={{ textAlign: "center", margin: 0 }}>Confirmation</h4>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '15px 20px', height: '100vh', overflowY: 'hidden' }}>
-          <p style={{ textAlign: 'center', color: 'black', marginTop: '25px', fontSize: '15px' }}>
-            {statusMessage}
-          </p>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <button onClick={() => setConfirmModalIsOpen(false)} className="customUI-No-Button" >
-            No
-          </button>
-          <button onClick={confirmAction} className="customUI-Yes-Button" >
-            Yes
-          </button>
-        </div>
+       <div className="chatbot-toggle-header">
+        <h4>Confirmation</h4>
+      </div>
+      <div className="chatbot-toggle-content">
+        <p>{statusMessage}</p>
+      </div>
+      <div className="chatbot-toggle-actions">
+        <button onClick={() => setConfirmModalIsOpen(false)} className="customUI-No-Button">
+          No
+        </button>
+        <button onClick={confirmAction} className="customUI-Yes-Button">
+          Yes
+        </button>
+      </div>
       </Modal>
-      {isLoading ? (<p style={{ marginTop:"100px",padding: "20px", alignItems: "center", justifyContent: "center", display: "flex", fontSize: "15px", color: "black" }}>Loading...</p>)
+      {isLoading ? (<p className="chatbot-toggle-loading">Loading...</p>)
 
       :
         
@@ -259,63 +256,43 @@ const ChatbotToggle = () => {
           <h2 className="em-heading">Chatbot On/Off</h2>
           <button onClick={() => setModalIsOpen(true)} className="em-button">Create</button>
         </div>
-        <div style={{ border: "2px solid #f7f4f4", overflow: "hidden", borderRadius: "8px" }}>
-          <table>
+        <div className="chatbot-toggle-container">
+          <table className="chatbot-toggle-table">
             <thead>
-              <tr style={{ textAlign: "center" }}>
-                <th style={{ width: "15%" }}>Queue Name</th>
-                <th style={{ width: "15%" }}>Modified By</th>
-                <th style={{ width: "40%",textAlign: 'center' }}>Message</th>
-                <th style={{ width: "10%" }}>Status</th>
-                <th style={{ width: "20%" }}>Actions</th>
+              <tr>
+                <th>Queue Name</th>
+                <th>Modified By</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {data.length === 0 ? (
                 <tr>
-                  <td colSpan="5" style={{ padding: "20px", textAlign: "center", fontSize: "15px", color: "black" }}>
+                  <td colSpan="5" className="chatbot-toggle-no-data">
                     No data found
                   </td>
                 </tr>
               ) : (
                 data.map((item, index) => (
-                  <tr key={index} style={{ textAlign: "center" }}>
-                    <td style={{ width: "15%" }}>{item.queueName}</td>
-                    <td style={{ width: "15%" }}>{item.updatedBy}</td>
-                    <td style={{ textAlign: "left" ,width:"40%",overflowWrap:"anywhere" }}>{item.message}</td>
-                    <td style={{ width: "10%" }} {...(item.status ? {} : { 'data-tooltip-id': 'toggle' })}>
+                  <tr key={index}>
+                    <td>{item.queueName}</td>
+                    <td>{item.updatedBy}</td>
+                    <td>{item.message}</td>
+                    <td {...(item.status ? {} : { 'data-tooltip-id': 'toggle' })}>
                       <Switch
                         onChange={(checked) => handleSwitch(checked, item.queueName, item.updatedBy)}
                         checked={item.status}
                         onColor="#4d216d"
                         offColor="#747272"
                         uncheckedIcon={
-                          <div
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              height: '100%',
-                              fontSize: 12,
-                              color: 'white',
-                              paddingRight: 2,
-                            }}
-                          >
+                          <div className="chatbot-toggle-switch-icon" style={{ paddingRight: 2 }}>
                             Off
                           </div>
                         }
                         checkedIcon={
-                          <div
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              height: '100%',
-                              fontSize: 12,
-                              color: 'white',
-                              paddingLeft: 2,
-                            }}
-                          >
+                          <div className="chatbot-toggle-switch-icon" style={{ paddingLeft: 2 }}>
                             On
                           </div>
                         }
@@ -324,19 +301,18 @@ const ChatbotToggle = () => {
                         width={40}
                       />
                     </td>
-                    <td style={{width:"20%"}}>
+                    <td>
                       <img
                         {...(item.status ? {} : { 'data-tooltip-id': 'edit' })}
                         src={FaEdit}
                         onClick={item.status ? null : () => handleEdit(item)}
-
-                        style={{ cursor: item.status ? 'not-allowed' :'pointer', marginRight: '20px', width: "20px", height: "20px",opacity: item.status ? 0.5 : 1 }}
+                        className={`chatbot-toggle-edit-icon ${item.status ? 'chatbot-toggle-disabled' : ''}`}
                       />
                       <img
                         {...(item.status ? {} : { 'data-tooltip-id': 'delete' })}
                         src={FaTrash}
-                        onClick={item.status ? null : () =>handleDelete(item.id)}
-                        style={{ cursor: item.status ? 'not-allowed' :'pointer', width: "20px", height: "20px", marginRight: "18px",opacity: item.status ? 0.5 : 1 }}
+                        onClick={item.status ? null : () => handleDelete(item.id)}
+                        className={`chatbot-toggle-delete-icon ${item.status ? 'chatbot-toggle-disabled' : ''}`}
                       />
                     </td>
                   </tr>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import SuccessModal from './SuccessModal';
+import '../../styles/message_accordion.css'
+
 Modal.setAppElement('#root');
 
 const CreateModal = ({ isOpen, onRequestClose, onCreate }) => {
@@ -86,36 +88,58 @@ const CreateModal = ({ isOpen, onRequestClose, onCreate }) => {
           }
         }}
         contentLabel="Create Data">
-        <h4 style={{ backgroundColor: '#4d216d', color: '#fff', padding: '10px', textAlign: 'center', width: '100%' }}>Create Emergency Message</h4>
-        <form style={{ width: '100%', flexGrow: 1 }}>
-          <div style={{ position: 'relative', marginBottom: '10px', padding: '10px 20px' }}>
-            <textarea placeholder="Message" value={message}
-             onChange={handleMessageChange} 
-             rows="2" 
-             style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: "8px" }} />
-            <span style={{ position: 'absolute', top: '0px', right: '10px', color: 'red' }}>*</span>
-            <div style={{ textAlign: 'right',color: message.length === 1000 ? 'red' : 'black' }}>
-             {message.length}/1000
-            </div>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', padding: '10px 20px' }}>
-            <div style={{ position: 'relative', width: '48%' }}>
-              <select value={flow} onChange={(e) => setFlow(e.target.value)} style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: "8px" }}>
-                <option value="">Select Flow</option>
-                <option value="master">Master</option>
-                <option value="retail">Retail</option>
-                <option value="zoom">Zoom</option>
-                <option value="driver">Driver</option>
-              </select>
-              <span style={{ position: 'absolute', top: '-8px', right: '-10px', color: 'red' }}>*</span>
-            </div>
-          </div>
-          {error && <div style={{ color: 'red', padding: '10px 20px' }}>{error}</div>}
-          <div className='customUI-button-body'>
-            <button type="button" onClick={() => { resetForm(); onRequestClose(); }} className="customUI-No-Button">Cancel</button>
-            <button type="button" className="customUI-Yes-Button" onClick={handleSubmit}>OK</button>
-          </div>
-        </form>
+        <h4 className="message-createModal-header">Create Emergency Message</h4>
+<form className="message-createModal-form">
+  <div className="message-createModal-textarea-container">
+    <textarea
+      placeholder="Message"
+      value={message}
+      onChange={handleMessageChange}
+      rows="2"
+      className="message-createModal-textarea"
+    />
+    <span className="message-createModal-required">*</span>
+    <div className="message-createModal-charCount">
+      {message.length}/1000
+    </div>
+  </div>
+  <div className="message-createModal-select-container">
+    <div className="message-createModal-select-wrapper">
+      <select
+        value={flow}
+        onChange={(e) => setFlow(e.target.value)}
+        className="message-createModal-select"
+      >
+        <option value="">Select Flow</option>
+        <option value="master">Master</option>
+        <option value="retail">Retail</option>
+        <option value="zoom">Zoom</option>
+        <option value="driver">Driver</option>
+      </select>
+      <span className="message-createModal-required-option">*</span>
+    </div>
+  </div>
+  {error && <div className="message-createModal-error">{error}</div>}
+  <div className="customUI-button-body">
+    <button
+      type="button"
+      onClick={() => {
+        resetForm();
+        onRequestClose();
+      }}
+      className="customUI-No-Button"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      className="customUI-Yes-Button"
+      onClick={handleSubmit}
+    >
+      OK
+    </button>
+  </div>
+</form>
       </Modal>
 
       <SuccessModal

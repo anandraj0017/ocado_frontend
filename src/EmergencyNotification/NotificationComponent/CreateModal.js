@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import SuccessModal from './SuccessModal';
+import '../../styles/notification_accordion.css'
 
 Modal.setAppElement('#root');
 
@@ -86,48 +87,48 @@ const CreateModal = ({ isOpen, onRequestClose, onCreate }) => {
         }}
         contentLabel="Create Notification"
       >
-        <h4 style={{ backgroundColor: '#4d216d', color: '#fff', padding: '10px', textAlign: 'center', width: '100%' }}>
-          Create New Global Notification
-        </h4>
-        <form style={{ width: '100%', flexGrow: 1 }}>
-          <div style={{ position: 'relative', marginBottom: '10px', padding: '10px 20px' }}>
-            <textarea
-              placeholder="Notification"
-              value={message}
-              onChange={handleMessageChange}
-              rows="2"
-              style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '8px' }}
-            />
-            <span style={{ position: 'absolute', top: '0px', right: '10px', color: 'red' }}>*</span>
-            <div style={{ textAlign: 'right',color: message.length === 1000 ? 'red' : 'black' }}>
-             {message.length}/1000
-            </div>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', padding: '10px 20px' }}>
-            <div style={{ position: 'relative', width: '48%' }}>
-              <select
-                value={flow}
-                onChange={(e) => setFlow(e.target.value)}
-                style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '8px' }}
-              >
-                <option value="">Select Flow</option>
-                <option value="retail">Retail</option>
-                <option value="zoom">Zoom</option>
-                <option value="driver">Driver</option>
-              </select>
-              <span style={{ position: 'absolute', top: '-8px', right: '-10px', color: 'red' }}>*</span>
-            </div>
-          </div>
-          {error && <div style={{ color: 'red', padding: '10px 20px' }}>{error}</div>}
-          <div className="customUI-button-body">
-            <button type="button" className="customUI-No-Button" onClick={() => { resetForm(); onRequestClose(); }}>
-              Cancel
-            </button>
-            <button type="button" className="customUI-Yes-Button" onClick={handleSubmit}>
-              OK
-            </button>
-          </div>
-        </form>
+       <h4 className="notification-create-modal-header">
+  Create New Global Notification
+</h4>
+<form className="notification-create-modal-form">
+  <div className="notification-create-modal-textarea-container">
+    <textarea
+      placeholder="Notification"
+      value={message}
+      onChange={handleMessageChange}
+      rows="2"
+      className="notification-create-modal-textarea"
+    />
+    <span className="notification-create-modal-required">*</span>
+    <div className="notification-create-modal-charCount">
+      {message.length}/1000
+    </div>
+  </div>
+  <div className="notification-create-modal-select-container">
+    <div className="notification-create-modal-select-wrapper">
+      <select
+        value={flow}
+        onChange={(e) => setFlow(e.target.value)}
+        className="notification-create-modal-select"
+      >
+        <option value="">Select Flow</option>
+        <option value="retail">Retail</option>
+        <option value="zoom">Zoom</option>
+        <option value="driver">Driver</option>
+      </select>
+      <span className="notification-create-modal-required-option">*</span>
+    </div>
+  </div>
+  {error && <div className="notification-create-modal-error">{error}</div>}
+  <div className="customUI-button-body">
+    <button type="button" className="customUI-No-Button" onClick={() => { resetForm(); onRequestClose(); }}>
+      Cancel
+    </button>
+    <button type="button" className="customUI-Yes-Button" onClick={handleSubmit}>
+      OK
+    </button>
+  </div>
+</form>
       </Modal>
       <SuccessModal
         isOpen={isSuccessModalOpen}

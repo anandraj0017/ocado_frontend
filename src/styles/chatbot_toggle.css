@@ -1,0 +1,213 @@
+.chatbot-main-div{
+    padding: 30px;
+}
+.chatbot-heading-div{
+    background-color: #4d216d;
+    color: white;
+    padding: 15px 20px;
+}
+.chatbot-heading{
+        text-align: center;
+        margin: 0;
+}
+.chatbot-toggle-container {
+    border: 2px solid #f7f4f4;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .chatbot-toggle-table th,
+  .chatbot-toggle-table td {
+    text-align: center;
+  }
+  
+  .chatbot-toggle-table th:nth-child(1),
+  .chatbot-toggle-table td:nth-child(1) {
+    width: 15%;
+  }
+  
+  .chatbot-toggle-table th:nth-child(2),
+  .chatbot-toggle-table td:nth-child(2) {
+    width: 15%;
+  }
+  
+  .chatbot-toggle-table th:nth-child(3),
+  .chatbot-toggle-table td:nth-child(3) {
+    width: 40%;
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+  
+  .chatbot-toggle-table th:nth-child(4),
+  .chatbot-toggle-table td:nth-child(4) {
+    width: 10%;
+  }
+  
+  .chatbot-toggle-table th:nth-child(5),
+  .chatbot-toggle-table td:nth-child(5) {
+    width: 20%;
+  }
+  
+  .chatbot-toggle-no-data {
+    padding: 20px;
+    text-align: center;
+    font-size: 15px;
+    color: black;
+  }
+  
+  .chatbot-toggle-switch-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 12px;
+    color: white;
+  }
+  
+  .chatbot-toggle-edit-icon,
+  .chatbot-toggle-delete-icon {
+    cursor: pointer;
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .chatbot-toggle-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .chatbot-toggle-header {
+    background-color: #4d216d;
+    color: white;
+    padding: 15px 20px;
+  }
+  
+  .chatbot-toggle-header h4 {
+    text-align: center;
+    margin: 0;
+  }
+  
+  .chatbot-toggle-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    height: 100vh;
+    overflow-y: hidden;
+  }
+  
+  .chatbot-toggle-content p {
+    text-align: center;
+    color: black;
+    margin-top: 25px;
+    font-size: 15px;
+  }
+  
+  .chatbot-toggle-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  .chatbot-toggle-confirmation-header {
+    background-color: #4d216d;
+    color: white;
+    padding: 15px 20px;
+  }
+  
+  .chatbot-toggle-confirmation-header h4 {
+    text-align: center;
+    margin: 0;
+  }
+  
+  .chatbot-toggle-confirmation-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    height: 100vh;
+    overflow-y: hidden;
+  }
+  
+  .chatbot-toggle-confirmation-content p {
+    text-align: center;
+    color: black;
+    margin-top: 25px;
+    font-size: 15px;
+  }
+  
+  .chatbot-toggle-confirmation-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .chatbot-toggle-message-container {
+    padding: 15px 20px;
+    flex: 1;
+    overflow-y: hidden;
+  }
+  
+  .chatbot-toggle-textarea-wrapper {
+    position: relative;
+    margin-bottom: 15px;
+  }
+  
+  .chatbot-toggle-custom-textarea {
+    width: 100%;
+  }
+  
+  .chatbot-toggle-required-indicator {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    color: red;
+  }
+  
+  .chatbot-toggle-message-length {
+    text-align: right;
+    color: black;
+  }
+  
+  .chatbot-toggle-message-length-red {
+    color: red;
+  }
+  
+  .chatbot-toggle-select-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .chatbot-toggle-select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 48%;
+  }
+  
+  .chatbot-toggle-custom-select {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 8px;
+  }
+  
+  .chatbot-toggle-error-message {
+    color: red;
+    padding: 10px 10px 10px 0px;
+  }
+  
+  .chatbot-toggle-action-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  .chatbot-toggle-loading {
+    margin-top: 100px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 15px;
+    color: black;
+  }

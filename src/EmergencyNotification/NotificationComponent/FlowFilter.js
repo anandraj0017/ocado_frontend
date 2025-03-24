@@ -1,5 +1,6 @@
 // src/components/FlowFilter.js
 import React from 'react';
+import '../../styles/notification_accordion.css'
 
 const FlowFilter = ({ selectedFlow, setSelectedFlow }) => {
   const flows = ['retail', 'zoom', 'driver'];
@@ -7,9 +8,9 @@ const FlowFilter = ({ selectedFlow, setSelectedFlow }) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
   return (
-    <div style={{marginTop:"-35px",marginLeft:"10px"}}>
+    <div className="notification-flow-filter-container">
       {flows.map((flow) => (
-        <label key={flow} style={{color:"white",marginRight:"5px",marginTop:"5px"}}>
+        <label key={flow} className="notification-flow-filter-label">
           <input
             type="radio"
             value={flow}

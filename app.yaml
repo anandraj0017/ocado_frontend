@@ -1,5 +1,5 @@
 runtime: nodejs18
-service: frontenddev
+service: adminportal
 handlers:
   # Serve all static files with url ending with a file extension
   - url: /(.*\..+)$

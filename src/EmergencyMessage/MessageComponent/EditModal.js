@@ -1,6 +1,7 @@
 // src/components/EditModal.js
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
+import '../../styles/message_accordion.css'
 
 Modal.setAppElement('#root');
 
@@ -68,19 +69,34 @@ const EditModal = ({ isOpen, onRequestClose, item, onSave ,fetchData }) => {
       }
     }}
      contentLabel="Edit Data">
-      <h4 style={{ backgroundColor: '#4d216d', color: '#fff', padding: '10px', textAlign: 'center', width: '100%' }}>Edit Form</h4>
-      <form >
-        {/* <div>{code}</div> */}
-        <label style={{marginLeft:"20px"}}>Message:</label>
-        <div style={{ marginBottom: '10px', padding: '10px 20px' }}>
-        <textarea style={{ width: '100%', padding: '10px', border: '1px solid #ccc',borderRadius:"8px" }}  value={message} onChange={(e) => setMessage(e.target.value)} />
-        </div>
-        {error && <div style={{ color: 'red', padding: '10px 20px' }}>{error}</div>}
-        <div className='customUI-button-body'>
-        <button className="customUI-No-Button" type="button" onClick={handleClose}>Cancel</button>
-        <button className="customUI-Yes-Button" type="button" onClick={handleSave}>Save</button>
-        </div>
-      </form>
+      <h4 className="message-editModal-header">Edit Form</h4>
+<form className="message-editModal-form">
+  <label className="message-editModal-label">Message:</label>
+  <div className="message-editModal-textarea-container">
+    <textarea
+      className="message-editModal-textarea"
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
+    />
+  </div>
+  {error && <div className="message-editModal-error">{error}</div>}
+  <div className="customUI-button-body">
+    <button
+      className="customUI-No-Button"
+      type="button"
+      onClick={handleClose}
+    >
+      Cancel
+    </button>
+    <button
+      className="customUI-Yes-Button"
+      type="button"
+      onClick={handleSave}
+    >
+      Save
+    </button>
+  </div>
+</form>
     </Modal>
 
   );

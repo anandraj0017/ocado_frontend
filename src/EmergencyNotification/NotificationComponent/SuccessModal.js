@@ -29,11 +29,13 @@ const SuccessModal = ({ isOpen, onRequestClose, title, message, code }) => {
         }
       }}
       contentLabel={title}>
-      <h4 style={{ backgroundColor: '#4d216d', color: '#fff', padding: '10px', textAlign: 'center', width: '100%' }}>{title}</h4>
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <p style={{fontSize:"15px",color:"black"}}>{message} {code && `with code ${code}`}</p>
-        <button type="button" onClick={onRequestClose} style={{backgroundColor:"#4d216d",color:"white"}} >OK</button>
-      </div>
+     <h4 className="notification-success-modal-header">{title}</h4>
+<div className="notification-success-modal-body">
+  <p className="notification-success-modal-message">
+    {message} {code && `with code ${code}`}
+  </p>
+  <button type="button" onClick={onRequestClose} className="notification-success-modal-button">OK</button>
+</div>
     </Modal>
   );
 };

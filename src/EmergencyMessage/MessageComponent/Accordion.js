@@ -6,7 +6,7 @@ import FlowFilter from './FlowFilter'; // Import FlowFilter
 import deleteIcon from '../../images/deleteIcon.png';
 import editIcon from '../../images/editIcon.png';
 import { Tooltip as ReactTooltip } from "react-tooltip";
-
+import '../../styles/message_accordion.css'
 // const debounce = (func, wait) => {
 //   let timeout;
 //   return function(...args) {
@@ -171,20 +171,20 @@ const Accordion = ({ title, data, filter, selectedFlow, setSelectedFlow, fetchDa
         <div>
           {title === 'Configure Emergency Messages' ? <FlowFilter selectedFlow={selectedFlow} setSelectedFlow={setSelectedFlow} /> : ""}
           {isLoading ? (
-            <p style={{ padding: "20px", alignItems: "center", justifyContent: "center", display: "flex", fontSize: "15px", color: "black" }}>Loading...</p>
+            <p className="em-accordion-loading">Loading...</p>
           ) : (
             filteredData.length === 0 ? (
-              <p style={{ padding: "20px", alignItems: "center", justifyContent: "center", display: "flex", fontSize: "15px", color: "black" }}>No data found</p>
+              <p className="em-accordion-no-data">No data found</p>
             ) : (
               <div className={title === 'Configure Emergency Messages' ? 'table-container2' : 'table-container'}>
                 <table className={title === 'Configure Emergency Messages' ? "em-all-table" : "em-active-table"}>
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
-                      <th onClick={handleSort} style={{ cursor: "pointer" }}>
+                    <tr className="em-accordion-tr-data" >
+                      <th onClick={handleSort}>
                         Code {sortOrder === 'asc' ? '↓' : '↑'}
                       </th>
                       {title === 'Active Emergency Messages' && <th>Flow</th>}
-                      <th >Activated On</th>
+                      <th>Activated On</th>
                       <th>Message</th>
                       <th>Status</th>
                       {title === 'Configure Emergency Messages' && <th>Actions</th>}
@@ -196,41 +196,20 @@ const Accordion = ({ title, data, filter, selectedFlow, setSelectedFlow, fetchDa
                         <td>{item.code}</td>
                         {title === 'Active Emergency Messages' && <td>{capitalizeFirstLetter(item.flow)}</td>}
                         <td>{item.createdDate}</td>
-                        <td style={{ textAlign: "left" }}>{item.message}</td>
-                        <td {...(item.isActive ? {} : { 'data-tooltip-id': 'toggle' })}
-                        >
+                        <td>{item.message}</td>
+                        <td {...(item.isActive ? {} : { 'data-tooltip-id': 'toggle' })}>
                           <Switch
                             onChange={() => handleToggle(item)}
                             checked={item.isActive}
                             onColor="#4d216d"
                             offColor="#747272"
                             uncheckedIcon={
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  height: '100%',
-                                  fontSize: 12,
-                                  color: 'white',
-                                  paddingRight: 2,
-                                }}
-                              >
+                              <div className="em-accordion-switch-icon" >
                                 Off
                               </div>
                             }
                             checkedIcon={
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  height: '100%',
-                                  fontSize: 12,
-                                  color: 'white',
-                                  paddingLeft: 2,
-                                }}
-                              >
+                              <div className="em-accordion-switch-icon">
                                 On
                               </div>
                             }
@@ -239,77 +218,69 @@ const Accordion = ({ title, data, filter, selectedFlow, setSelectedFlow, fetchDa
                             width={40}
                           />
                         </td>
-                        {title === 'Configure Emergency Messages' && <td>
-                          <img
-                            src={editIcon}
-                            {...(item.isActive ? {} : { 'data-tooltip-id': 'edit' })}
-                            style={{
-                              width: "20px",
-                              height: "20px",
-                              marginRight: "18px",
-                              cursor: item.isActive ? 'not-allowed' : 'pointer',
-                              opacity: item.isActive ? 0.5 : 1
-                            }}
-                            onClick={item.isActive ? null : () => openEditModal(item)}
-                          /><img
-                          src={deleteIcon}
-                          {...(item.isActive ? {} : { 'data-tooltip-id': 'delete' })}
-                          style={{
-                            width: "20px",
-                            height: "20px",
-                            cursor: item.isActive ? 'not-allowed' : 'pointer',
-                            opacity: item.isActive ? 0.5 : 1
-                          }}
-                          onClick={item.isActive ? null : () => handleDelete(item.id, item.message, item.code)}
-                        />
-                      </td>}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )
-        )}
-      </div>
-    )}
-    <ConfirmationModal
-      isOpen={isConfirmationOpen}
-      onRequestClose={() => setIsConfirmationOpen(false)}
-      onConfirm={confirmationAction}
-      message={confirmationMessage}
-    />
-    <EditModal
-      isOpen={isEditModalOpen}
-      onRequestClose={closeEditModal}
-      item={editingItem}
-      onSave={handleSave}
-      fetchData={fetchData}
-    />
-    <ReactTooltip
-      id="Emergency Message"
-      place="top"
-      content="Click to expand or collapse"
-      className='toggleOnAndOff'
-    />
-    <ReactTooltip
-      id="edit"
-      place="top"
-      content="Edit"
-      className='toggleOnAndOff'
-    />
-    <ReactTooltip
-      id="delete"
-      place="top"
-      content="Delete"
-      className='toggleOnAndOff'
-    />
-    <ReactTooltip
-      id="toggle"
-      place="top"
-      content="Toggle On and Off"
-      className='toggleOnAndOff'
-    />
-  </div>
+                        {title === 'Configure Emergency Messages' && (
+                          <td>
+                            <img
+                              src={editIcon}
+                              {...(item.isActive ? {} : { 'data-tooltip-id': 'edit' })}
+                              className={`em-accordion-edit-icon ${item.isActive ? 'em-accordion-disabled' : ''}`}
+                              onClick={item.isActive ? null : () => openEditModal(item)}
+                            />
+                            <img
+                              src={deleteIcon}
+                              {...(item.isActive ? {} : { 'data-tooltip-id': 'delete' })}
+                              className={`em-accordion-delete-icon ${item.isActive ? 'em-accordion-disabled' : ''}`}
+                              onClick={item.isActive ? null : () => handleDelete(item.id, item.message, item.code)}
+                            />
+                          </td>
+                        )}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )
+          )}
+        </div>
+      )}
+      <ConfirmationModal
+        isOpen={isConfirmationOpen}
+        onRequestClose={() => setIsConfirmationOpen(false)}
+        onConfirm={confirmationAction}
+        message={confirmationMessage}
+      />
+      <EditModal
+        isOpen={isEditModalOpen}
+        onRequestClose={closeEditModal}
+        item={editingItem}
+        onSave={handleSave}
+        fetchData={fetchData}
+      />
+      <ReactTooltip
+        id="Emergency Message"
+        place="top"
+        content="Click to expand or collapse"
+        className='toggleOnAndOff'
+      />
+      <ReactTooltip
+        id="edit"
+        place="top"
+        content="Edit"
+        className='toggleOnAndOff'
+      />
+      <ReactTooltip
+        id="delete"
+        place="top"
+        content="Delete"
+        className='toggleOnAndOff'
+      />
+      <ReactTooltip
+        id="toggle"
+        place="top"
+        content="Toggle On and Off"
+        className='toggleOnAndOff'
+      />
+    </div>
 );
 };
 

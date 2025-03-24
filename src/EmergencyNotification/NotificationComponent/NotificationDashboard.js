@@ -49,7 +49,7 @@ const NotificationDashboard = () => {
     <div className='App'>
       <div className="em-container">
       <h2 className="em-heading">Emergency Notification</h2>
-      <div className="header-buttons" style={{ display: "flex", gap: "10px" }}>
+      <div className="header-buttons notification-dashboard">
       <button onClick={openCreateModal} className="em-button">Create New Global Notification</button>
       <button onClick={openUploadModal} className="em-button">Upload Notification</button>
       </div>

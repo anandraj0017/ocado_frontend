@@ -6,6 +6,7 @@ import deleteIcon from '../../images/deleteIcon.png';
 import downloadIcon from '../../images/downloadIcon.png';
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import axios from 'axios'
+import '../../styles/notification_accordion.css'
 // const debounce = (func, wait) => {
 //   let timeout;
 //   return function (...args) {
@@ -199,15 +200,15 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
         <div>
           {title === 'Configure Emergency Notifications' ? <FlowFilter selectedFlow={selectedFlow} setSelectedFlow={setSelectedFlow} /> : ""}
           {isLoading ? (
-            <p style={{ padding: "20px", alignItems: "center", justifyContent: "center", display: "flex", fontSize: "15px", color: "black" }}>Loading...</p>
+            <p className="notification-accordion-loading">Loading...</p>
           ) : (
             filteredData.length === 0 ? (
-              <p style={{ padding: "20px", alignItems: "center", justifyContent: "center", display: "flex", fontSize: "15px", color: "black" }}>No data found</p>
+              <p className="notification-accordion-no-data">No data found</p>
             ) : (
               <div className={title === 'Configure Emergency Notifications' ? 'table-container2' : 'table-container'}>
                 <table className={title === 'Configure Emergency Notifications' ? "en-all-table" : "en-active-table"}>
                   <thead>
-                    <tr style={{ textAlign: "center" }}>
+                    <tr className="notification-accordion-table-header">
                       <th>Flow</th>
                       <th>Updated By</th>
                       {title === 'Configure Emergency Notifications' ? <th>Uploaded On</th> : <th>Last Updated Date</th>}
@@ -215,11 +216,9 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
                       <th>Files</th>
                       <th>Status</th>
                       {title === 'Configure Emergency Notifications' && <th>Actions</th>}
-
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {JSON.stringify(All_notifications)} */}
                     {filteredData.map((item, index) => (
                       <tr key={index} className="table-row">
                         <td>{item.flow ? capitalizeFirstLetter(item.flow) : 'N/A'}</td>
@@ -227,41 +226,17 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
                         {title === 'Configure Emergency Notifications' ? <td>{item.updatedDate}</td> : <td>{item.updatedDate}</td>}
                         <td>{item.message}</td>
                         <td>{item.filename}</td>
-                        <td {...(item.isActive ? {} : { 'data-tooltip-id': 'toggle' })} >
+                        <td {...(item.isActive ? {} : { 'data-tooltip-id': 'toggle' })}>
                           <Switch
                             onChange={() => handleToggle(item)}
                             checked={item.isActive}
                             onColor="#4d216d"
                             offColor="#747272"
                             uncheckedIcon={
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  height: '100%',
-                                  fontSize: 12,
-                                  color: 'white',
-                                  paddingRight: 2,
-                                }}
-                              >
-                                Off
-                              </div>
+                              <div className="notification-accordion-switch-off">Off</div>
                             }
                             checkedIcon={
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  height: '100%',
-                                  fontSize: 12,
-                                  color: 'white',
-                                  paddingLeft: 2,
-                                }}
-                              >
-                                On
-                              </div>
+                              <div className="notification-accordion-switch-on">On</div>
                             }
                             handleDiameter={18}
                             height={20}
@@ -271,29 +246,17 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
                         {title === 'Configure Emergency Notifications' && (
                           <td>
                             <img
-                              {...(item.isActive ? {} : (item.filename ?{ 'data-tooltip-id': 'download' }:{}))}
+                              {...(item.isActive ? {} : (item.filename ? { 'data-tooltip-id': 'download' } : {}))}
                               src={downloadIcon}
-                              style={{
-                                width: "20px",
-                                height: "20px",
-                                marginRight: "18px",
-                                cursor: item.isActive  ? 'not-allowed' : (item.filename ? 'pointer' : 'not-allowed'),
-                                opacity: item.isActive ? 0.5 : (item.filename ? '1' : '0.5')
-                              }}
-                              onClick={!item.isActive && item.filename ?  () => handleDownload(item.docID,item.filename) :null}
-                              //onClick={()=>handleDownload(item.docID,item.filename)}
+                              className="notification-accordion-download-icon"
+                              onClick={!item.isActive && item.filename ? () => handleDownload(item.docID, item.filename) : null}
                               alt="Download"
                             />
                             <img
-                              {...(item.isActive  ? {} :{ 'data-tooltip-id': 'delete' })}
+                              {...(item.isActive ? {} : { 'data-tooltip-id': 'delete' })}
                               src={deleteIcon}
-                              style={{
-                                width: "20px",
-                                height: "20px",
-                                cursor: item.isActive  ? 'not-allowed' : 'pointer',
-                                opacity: item.isActive ? 0.5 : 1
-                              }}
-                              onClick={!item.isActive  ?   () => handleDelete(item.docID) : null}
+                              className="notification-accordion-delete-icon"
+                              onClick={!item.isActive ? () => handleDelete(item.docID) : null}
                               alt="Delete"
                             />
                           </td>
@@ -318,12 +281,14 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
         place="top"
         content="Click to expand or collapse"
         className='toggleOnAndOff'
-      /><ReactTooltip
+      />
+      <ReactTooltip
         id="download"
         place="top"
         content="Download"
         className='toggleOnAndOff'
-      /><ReactTooltip
+      />
+      <ReactTooltip
         id="delete"
         place="top"
         content="Delete"

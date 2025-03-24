@@ -9,9 +9,7 @@ import PrivateLayout from './PrivateComponents/PrivateLayout';
 import PrivateRoute from './PrivateComponents/PrivateRoute';
 import LandingPage from './PrivateComponents/LandingPage';
 import ChatbotToggle from './ChatBot/ChatbotToggle';
-import FileUpload from './EmergencyNotification/NotificationComponent/FileUpload';
 import './App.css';
-import FileDownloader from './EmergencyNotification/NotificationComponent/FileDownloader';
 Modal.setAppElement('#root');
 
 const App = () => {
@@ -39,16 +37,8 @@ const App = () => {
                 <ChatbotToggle />
               </PrivateLayout>
             </PrivateRoute>} />
-            <Route path="/file" element={<PrivateRoute>
-              <PrivateLayout>
-                <FileUpload />
-              </PrivateLayout>
-            </PrivateRoute>} />
-            <Route path="/download" element={<PrivateRoute>
-              <PrivateLayout>
-                <FileDownloader />
-              </PrivateLayout>
-            </PrivateRoute>} />
+           
+            
             
          
         </Routes>
