@@ -50,7 +50,7 @@ const ChatbotToggle = () => {
 
     if (isEditing) {
       try {
-        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/editStatus`, { message, status, queueName:flow, updatedBy });
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/editQueueMessage`, { message, status, queueName:flow, updatedBy });
         // alert(response.data.message);
         setIsEditing(false);
         fetchData(); // Refresh data
@@ -74,14 +74,14 @@ const ChatbotToggle = () => {
     setError('');
   };
 
-  const handleSwitch = (checked, queueName, updatedBy) => {
+  const handleSwitch = (checked, queueName) => {
     const confirmationMessage = checked
     ? "Are you sure you want to enable the status?"
     : "Are you sure you want to disable the status?";
 
     setConfirmAction(() => async () => {
       try {
-        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/editStatus`, { queueName, status: checked, updatedBy });
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/toggleQueueStatus`, { queueName, status: checked, updatedBy });
         // alert(response.data.data);
         fetchData(); // Refresh data
       } catch (error) {
