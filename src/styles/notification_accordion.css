@@ -15,7 +15,9 @@
     font-size: 15px;
     color: black;
   }
-  
+  .en-message-centered{
+    text-align: left;
+  }
   .notification-accordion-table-header {
     text-align: center;
   }
@@ -226,7 +228,10 @@
     font-size: 15px;
     color: black;
   }
-  
+  .en-accordion-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
   .notification-success-modal-button {
     background-color: #4d216d;
     color: white;

@@ -196,7 +196,7 @@ const Accordion = ({ title, data, filter, selectedFlow, setSelectedFlow, fetchDa
                         <td>{item.code}</td>
                         {title === 'Active Emergency Messages' && <td>{capitalizeFirstLetter(item.flow)}</td>}
                         <td>{item.createdDate}</td>
-                        <td>{item.message}</td>
+                        <td className="em-message-centered">{item.message}</td>
                         <td {...(item.isActive ? {} : { 'data-tooltip-id': 'toggle' })}>
                           <Switch
                             onChange={() => handleToggle(item)}
@@ -219,7 +219,7 @@ const Accordion = ({ title, data, filter, selectedFlow, setSelectedFlow, fetchDa
                           />
                         </td>
                         {title === 'Configure Emergency Messages' && (
-                          <td>
+                          <td className="actions-column">
                             <img
                               src={editIcon}
                               {...(item.isActive ? {} : { 'data-tooltip-id': 'edit' })}

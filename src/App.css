@@ -187,7 +187,7 @@ th:nth-child(3), td:nth-child(3) {
  
  
 .em-active-table th:nth-child(1), .em-active-table td:nth-child(1) {
-  width: 15%;
+  width: 10%;
 }
  
 .em-active-table th:nth-child(2), .em-active-table td:nth-child(2) {
@@ -198,30 +198,40 @@ th:nth-child(3), td:nth-child(3) {
   width: 15%;
 }
 .em-active-table th:nth-child(4), .em-active-table td:nth-child(4) {
-  width: 40%;
+  width: 55%;
 }
 .em-active-table th:nth-child(5), .em-active-table td:nth-child(5) {
   width: 10%;
 }
-.em-active-table th:nth-child(6), .em-active-table td:nth-child(6) {
-  width: 10%;
-}
+
 .em-all-table th:nth-child(1), .em-all-table td:nth-child(1) {
-  width: 15%;
+  width: 10%;
 }
  
 .em-all-table th:nth-child(2), .em-all-table td:nth-child(2) {
-  width: 25%;
+  width: 10%;
 }
  
 .em-all-table th:nth-child(3), .em-all-table td:nth-child(3) {
-  width: 40%;
+  width: 60%;
 }
 .em-all-table th:nth-child(4), .em-all-table td:nth-child(4) {
   width: 10%;
 }
 .em-all-table th:nth-child(5), .em-all-table td:nth-child(5) {
   width: 10%;
+}
+.em-active-table th, .em-active-table td,
+.em-all-table th, .em-all-table td {
+    word-break: break-word; /* Ensures long words break */
+    overflow-wrap: break-word; /* Ensures long words wrap */
+    white-space: normal;
+}
+.en-active-table th, .en-active-table td,
+.en-all-table th, .en-all-table td {
+    word-break: break-word; /* Ensures long words break */
+    overflow-wrap: break-word; /* Ensures long words wrap */
+    white-space: normal;
 }
 table tbody tr:nth-child(odd) {
   background-color: #ffffff; /* Light grey for odd rows */

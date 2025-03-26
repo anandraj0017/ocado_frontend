@@ -211,7 +211,7 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
                     <tr className="notification-accordion-table-header">
                       <th>Flow</th>
                       <th>Updated By</th>
-                      {title === 'Configure Emergency Notifications' ? <th>Uploaded On</th> : <th>Last Updated Date</th>}
+                      {title === 'Configure Emergency Notifications' ? <th>Updated On</th> : <th>Last Updated Date</th>}
                       <th>Notification Messages</th>
                       <th>Files</th>
                       <th>Status</th>
@@ -224,7 +224,7 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
                         <td>{item.flow ? capitalizeFirstLetter(item.flow) : 'N/A'}</td>
                         <td>{item.updatedBy}</td>
                         {title === 'Configure Emergency Notifications' ? <td>{item.updatedDate}</td> : <td>{item.updatedDate}</td>}
-                        <td>{item.message}</td>
+                        <td className="en-message-centered">{item.message}</td>
                         <td>{item.filename}</td>
                         <td {...(item.isActive ? {} : { 'data-tooltip-id': 'toggle' })}>
                           <Switch
@@ -248,14 +248,15 @@ const Accordion = ({ title, data, filter, onUpdate, selectedFlow, setSelectedFlo
                             <img
                               {...(item.isActive ? {} : (item.filename ? { 'data-tooltip-id': 'download' } : {}))}
                               src={downloadIcon}
-                              className="notification-accordion-download-icon"
+                              className={`notification-accordion-download-icon ${!item.filename ? 'en-accordion-disabled' : item.filename && item.isActive ?'en-accordion-disabled':''}`}
+                              
                               onClick={!item.isActive && item.filename ? () => handleDownload(item.docID, item.filename) : null}
                               alt="Download"
                             />
                             <img
                               {...(item.isActive ? {} : { 'data-tooltip-id': 'delete' })}
                               src={deleteIcon}
-                              className="notification-accordion-delete-icon"
+                              className={`notification-accordion-delete-icon ${item.isActive ? 'en-accordion-disabled' : ''}`}
                               onClick={!item.isActive ? () => handleDelete(item.docID) : null}
                               alt="Delete"
                             />
