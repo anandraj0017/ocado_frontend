@@ -54,7 +54,8 @@ navigate('/emergencyMessage')
               data-tooltip-id="On And Off"
               onClick={handleOnAndOff}
             />
-            <p className="image-title">Chatbot On/Off</p>
+            <p className="image-title">  Chat routing to Advisor On/Off (Chatbot on/off)
+            </p>
           </div>
         </div>
       </div>

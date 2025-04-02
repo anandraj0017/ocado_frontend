@@ -119,8 +119,7 @@ const UploadModal = ({ isOpen, onRequestClose, onUpload }) => {
     >
       <option value="">Select Flow</option>
       <option value="retail">Retail</option>
-      <option value="zoom">Zoom</option>
-      <option value="driver">Driver</option>
+     
     </select>
     <span className="notification-upload-modal-required-option">*</span>
   </div>

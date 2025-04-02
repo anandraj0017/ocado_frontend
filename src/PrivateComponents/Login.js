@@ -132,7 +132,7 @@ const LoginPage = () => {
               required
             />
             <span className="password-toggle-icon" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <img style={{width:"25px",height:"20px"}}src={eyeClose}></img> : <img style={{width:"25px",height:"20px"}} src={eyeOpen}></img> }
+              {showPassword ? <img style={{width:"25px",height:"20px",border:"1px solid #0a4b78"}}src={eyeClose}></img> : <img style={{width:"25px",height:"20px"}} src={eyeOpen}></img> }
             </span>
           </div>
           {error && (
@@ -148,6 +148,36 @@ const LoginPage = () => {
                 className="google-login-button"
               />
             </GoogleOAuthProvider>
+          </div>
+          <div style={{marginTop:"10px"}}>
+          <a 
+      href="#" 
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white', // Microsoft dark gray
+        color: '#2F2F2F',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        textDecoration: 'none',
+      }}
+    >
+      <img 
+        src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" 
+        alt="Microsoft Logo" 
+        style={{
+          marginRight: '10px',
+          width: '20px',
+          height: '20px',
+        }} 
+      />
+      Sign in with Microsoft
+    </a>
           </div>
           {/* <div className="button-row">
              <div className="remember-me">

@@ -9,7 +9,7 @@
 .login-container {
   padding: 50px;
   border-radius: 10px;
-  width: 420px;
+  width: 450px;
   text-align: center;
   background-color: transparent;
 }
@@ -47,7 +47,8 @@
   background-color: transparent;
   margin-bottom: 15px;
   color: white; /* Ensure text color is white */
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .input-field:focus {

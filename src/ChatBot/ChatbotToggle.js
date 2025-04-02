@@ -253,8 +253,9 @@ const ChatbotToggle = () => {
         
       (<>
         <div className="em-container">
-          <h2 className="em-heading">Chatbot On/Off</h2>
-          <button onClick={() => setModalIsOpen(true)} className="em-button">Create</button>
+        <h1 className="em-heading">
+  Chat routing to Advisor On/Off (Chatbot on/off)
+</h1>          <button onClick={() => setModalIsOpen(true)} className="em-button">Create</button>
         </div>
         <div className="chatbot-toggle-container">
           <table className="chatbot-toggle-table">
@@ -262,7 +263,7 @@ const ChatbotToggle = () => {
               <tr>
                 <th>Queue Name</th>
                 <th>Modified By</th>
-                <th>Message</th>
+                <th style={{textAlign:"center"}}>Message</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
