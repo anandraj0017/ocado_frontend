@@ -47,7 +47,11 @@ const LoginPage = () => {
     googleLogout();
     console.log('Logged out');
   };
-
+  const redirectToSAMLLogin = () => {
+    window.location.href="https://apifirestore-1-dot-orl-tst-ccai-prj01.uc.r.appspot.com/auth/saml"
+    // window.location.href = "https://adminportal-dot-orl-tst-ccai-prj01.uc.r.appspot.com/auth/saml";
+    //window.location.href = "http://localhost:5000/auth/saml";
+  };
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!userId || !password) {
@@ -149,9 +153,10 @@ const LoginPage = () => {
               />
             </GoogleOAuthProvider>
           </div>
-          <div style={{marginTop:"10px"}}>
+          {/* <div style={{marginTop:"10px"}}>
           <a 
       href="#" 
+      onClick={redirectToSAMLLogin}
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -178,7 +183,7 @@ const LoginPage = () => {
       />
       Sign in with Microsoft
     </a>
-          </div>
+          </div> */}
           {/* <div className="button-row">
              <div className="remember-me">
               <input
@@ -191,7 +196,7 @@ const LoginPage = () => {
             </div> 
             <button type="submit" className="login-button"><b>Log In</b></button>
           </div> */}
-          <div className="button-row">
+          {/* <div className="button-row">
   <div className="remember-me">
     <label htmlFor="rememberMe" className="custom-checkbox">
       <input
@@ -205,6 +210,9 @@ const LoginPage = () => {
     </label>
   </div> 
   <button type="submit" className="login-button"><b>Log In</b></button>
+</div> */}
+<div style={{display:"flex",justifyContent:"right",marginTop:"20px"}}>
+<button type="submit" className="login-button"><b>Log In</b></button>
 </div>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import SuccessModal from './SuccessModal';
-import '../../styles/notification_accordion.css'
+import '../../styles/notification_accordion.css';
 
 Modal.setAppElement('#root');
 
@@ -13,6 +13,7 @@ const CreateModal = ({ isOpen, onRequestClose, onCreate }) => {
   const updatedBy = localStorage.getItem('username');
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [createdMessage, setCreatedMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false); // New state variable
 
   const closeSuccessModal = () => {
     setIsSuccessModalOpen(false);
@@ -29,6 +30,7 @@ const CreateModal = ({ isOpen, onRequestClose, onCreate }) => {
     setFlow('');
     setPredefined(false);
     setError('');
+    setIsSubmitting(false); // Reset the submitting state
   };
 
   const handleSubmit = async () => {
@@ -36,6 +38,8 @@ const CreateModal = ({ isOpen, onRequestClose, onCreate }) => {
       setError('All fields are required.');
       return;
     }
+
+    setIsSubmitting(true); // Disable the button
 
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}/create_notification`, {
       method: 'POST',
@@ -87,48 +91,60 @@ const CreateModal = ({ isOpen, onRequestClose, onCreate }) => {
         }}
         contentLabel="Create Notification"
       >
-       <h4 className="notification-create-modal-header">
-  Create New Global Notification
-</h4>
-<form className="notification-create-modal-form">
-  <div className="notification-create-modal-textarea-container">
-    <textarea
-      placeholder="Notification"
-      value={message}
-      onChange={handleMessageChange}
-      rows="2"
-      className="notification-create-modal-textarea"
-    />
-    <span className="notification-create-modal-required">*</span>
-    <div className="notification-create-modal-charCount">
-      {message.length}/1000
-    </div>
-  </div>
-  <div className="notification-create-modal-select-container">
-    <div className="notification-create-modal-select-wrapper">
-      <select
-        value={flow}
-        onChange={(e) => setFlow(e.target.value)}
-        className="notification-create-modal-select"
-      >
-        <option value="">Select Flow</option>
-        <option value="retail">Retail</option>
-        <option value="zoom">Zoom</option>
-        <option value="driver">Driver</option>
-      </select>
-      <span className="notification-create-modal-required-option">*</span>
-    </div>
-  </div>
-  {error && <div className="notification-create-modal-error">{error}</div>}
-  <div className="customUI-button-body">
-    <button type="button" className="customUI-No-Button" onClick={() => { resetForm(); onRequestClose(); }}>
-      Cancel
-    </button>
-    <button type="button" className="customUI-Yes-Button" onClick={handleSubmit}>
-      OK
-    </button>
-  </div>
-</form>
+        <h4 className="notification-create-modal-header">
+          Create New Global Notification
+        </h4>
+        <form className="notification-create-modal-form">
+          <div className="notification-create-modal-textarea-container">
+            <textarea
+              placeholder="Notification"
+              value={message}
+              onChange={handleMessageChange}
+              rows="2"
+              className="notification-create-modal-textarea"
+            />
+            <span className="notification-create-modal-required">*</span>
+            <div className="notification-create-modal-charCount">
+              {message.length}/1000
+            </div>
+          </div>
+          <div className="notification-create-modal-select-container">
+            <div className="notification-create-modal-select-wrapper">
+              <select
+                value={flow}
+                onChange={(e) => setFlow(e.target.value)}
+                className="notification-create-modal-select"
+              >
+                <option value="">Select Flow</option>
+                <option value="retail">Retail</option>
+                <option value="zoom">Zoom</option>
+                <option value="driver">Driver</option>
+              </select>
+              <span className="notification-create-modal-required-option">*</span>
+            </div>
+          </div>
+          {error && <div className="notification-create-modal-error">{error}</div>}
+          <div className="customUI-button-body">
+            <button
+              type="button"
+              className="customUI-No-Button"
+              onClick={() => {
+                resetForm();
+                onRequestClose();
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className="customUI-Yes-Button"
+              onClick={handleSubmit}
+              disabled={isSubmitting} // Disable the button when submitting
+            >
+              OK
+            </button>
+          </div>
+        </form>
       </Modal>
       <SuccessModal
         isOpen={isSuccessModalOpen}

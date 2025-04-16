@@ -23,7 +23,8 @@ const ChatbotToggle = () => {
   const updatedBy = localStorage.getItem('username');
   const flowOptions = ['Zoom Chat', 'Retail Chat Osp'];
    const [isLoading, setIsLoading] = useState(true); // Add loading state
- 
+   const [isSubmitting, setIsSubmitting] = useState(false); // New state variable
+
   const fetchData = async () => {
     try {
       setIsLoading(true)
@@ -43,35 +44,37 @@ const ChatbotToggle = () => {
   }, []);
 
   const handleSave = async () => {
-    if (!message.trim()  || !flow) {
+    if (!message.trim() || !flow) {
       setError('All fields are required.');
       return;
     }
-
+  
+    setIsSubmitting(true); // Disable the button
+  
     if (isEditing) {
       try {
-        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/editQueueMessage`, { message, status, queueName:flow, updatedBy });
-        // alert(response.data.message);
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/editQueueMessage`, { message, status, queueName: flow, updatedBy });
         setIsEditing(false);
         fetchData(); // Refresh data
       } catch (error) {
-        // alert(error.response.data.error);
+        console.error(error.response.data.error);
       }
     } else {
       try {
         const newStatus = true;
-        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/createQueue`, { message, status: newStatus, queueName:flow ,updatedBy});
-        // alert(response.data.message);
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/createQueue`, { message, status: newStatus, queueName: flow, updatedBy });
         fetchData(); // Refresh data
       } catch (error) {
-        // alert(error.response.data.error);
+        console.error(error.response.data.error);
       }
     }
+  
     setMessage('');
     setStatus(false);
     setFlow('');
     setModalIsOpen(false);
     setError('');
+    setIsSubmitting(false); // Re-enable the button
   };
 
   const handleSwitch = (checked, queueName) => {
@@ -202,7 +205,7 @@ const ChatbotToggle = () => {
         <button onClick={handleCancel} className="customUI-No-Button">
           Cancel
         </button>
-        <button onClick={handleSave} className="customUI-Yes-Button">
+        <button onClick={handleSave} disabled={isSubmitting} className="customUI-Yes-Button">
           {isEditing ? "Save" : "Add"}
         </button>
       </div>
